@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-node
+  name: hello-node-argo
   namespace: produccion
   labels:
-    app: hello-node
+    app: hello-node-argo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-node
+      app: hello-node-argo
   template:
     metadata:
       labels:
-        app: hello-node
+        app: hello-node-argo
     spec:
       containers:
-      - name: hello-node
-        image: {imageTag}
+      - name: hello-node-argo
+        image: hello-node: gcr.io/jenkins-servinformacion/clase3_pipeline:41
         ports:
         - containerPort: 8888
