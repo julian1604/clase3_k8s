@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: hello-node-argo
-        image: gcr.io/jenkins-servinformacion/clase3_pipeline:41
+        image: gcr.io/jenkins-servinformacion/clase3_pipeline:48
         ports:
         - containerPort: 8888
