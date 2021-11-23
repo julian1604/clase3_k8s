@@ -4,5 +4,5 @@ resources:
 - service.yaml
 configMapGenerator:
 - envs:
-  - environment-env.yaml
+  - environment_env.yaml
   name: envs
