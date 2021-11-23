@@ -2,3 +2,7 @@ resources:
 - deployment.yaml
 - hpa.yaml
 - service.yaml
+configMapGenerator:
+- envs:
+  - environment-env.yaml
+  name: envs
