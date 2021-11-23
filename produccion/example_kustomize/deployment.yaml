@@ -1,0 +1,48 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "chiper"
+  labels:
+    app: "chiper"
+spec:
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
+     maxSurge: 25%
+  selector:
+    matchLabels:
+      app: "chiper"
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        consul.hashicorp.com/connect-inject: "false"
+        linkerd.io/inject: enabled
+        sidecar.istio.io/inject: "false"
+        config.linkerd.io/skip-outbound-ports: "3306"
+      labels:
+        app: "chiper"
+    spec:
+      affinity:
+        nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: devops-control
+              operator: NotIn
+              values:
+              - "true"
+      containers:
+      - name: "chiper"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        image: "nginx:latest"
+        resources:
+          limits:
+            cpu: 350m
+            memory: 256Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
