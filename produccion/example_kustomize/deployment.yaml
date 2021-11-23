@@ -35,6 +35,9 @@ spec:
               - "true"
       containers:
       - name: "chiper"
+        envFrom:
+         - configMapRef:
+              name: envs      
         ports:
         - containerPort: 80
           protocol: TCP
